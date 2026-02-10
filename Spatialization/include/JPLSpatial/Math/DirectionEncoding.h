@@ -273,7 +273,7 @@ namespace JPL
 
     template<Octahedron::CPrecision Precision>
     template<std::integral T>
-    JPL_INLINE constexpr OctahedronEncoding<Precision>::EncodedType OctahedronEncoding<Precision>::CombineComponents(T x, T y) noexcept
+    JPL_INLINE constexpr typename OctahedronEncoding<Precision>::EncodedType OctahedronEncoding<Precision>::CombineComponents(T x, T y) noexcept
     {
         return (std::min(EncodedType(y), cMaxComponentValue) << cBitsPerAxis) | std::min(EncodedType(x), cMaxComponentValue);
     }
@@ -289,7 +289,7 @@ namespace JPL
 
     template<Octahedron::CPrecision Precision>
     template<CVec3 Vec3>
-    constexpr OctahedronEncoding<Precision>::EncodedType OctahedronEncoding<Precision>::Encode(const Vec3& direction)
+    constexpr typename OctahedronEncoding<Precision>::EncodedType OctahedronEncoding<Precision>::Encode(const Vec3& direction)
     {
         const Vec3 dirAbs = Abs(direction);
         const FloatType L1Norm = FloatType(GetX(dirAbs) + GetY(dirAbs) + GetZ(dirAbs));

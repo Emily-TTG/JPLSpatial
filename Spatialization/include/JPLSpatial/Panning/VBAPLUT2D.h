@@ -350,7 +350,8 @@ namespace JPL::VBAP
         JPL_ASSERT(!mDiamondCorrectionLUT.empty());
 
         // Diamond to uniform index
-        const float diamond = ToDiamond(Vec2(x, y));
+
+        const float diamond = ToDiamond(Vec2{.X = x, .Y = y});
         const auto angleT = static_cast<int>(diamond * sCorrectionLUTSize + 0.5f) & sCorrectionLUTMask;
 
         //return static_cast<int>(diamond * mLUTResolution + 0.5f) & mLUTResolutionMask;
@@ -626,7 +627,9 @@ namespace JPL::VBAP
         {
             JPL_ASSERT(diamond <= 1.0f);
 
-            const Vec2 direction = FromDiamond(diamond);
+            const float theta = mLUT.LUTPositionToAngle(pos);
+            const auto [s, c] = Math::SinCos(theta);
+            const Vec2 direction{.X = s, .Y = -c}; // TODO: this -c is fishy
 
             // Position of the next diamond step value in the LUT
             // (number of channels stride)
@@ -651,18 +654,18 @@ namespace JPL::VBAP
 
             const auto mat =
                 Math::Mat2<Vec2>::FromColumns(
-                    Vec2(s1, -c1),
-                    Vec2(s2, -c2));
+                    Vec2{.X = s1, .Y = -c1},
+                    Vec2{.X = s2, .Y = -c2});
 
             // Inverse will fail for wide aperture angles,
             // therefore we need at least quad layout for <= 90 degree max aperture
             Math::Mat2<Vec2> invL;
             (void)JPL_ENSURE(mat.TryInverse(invL));
 
-            mChannelPairs.emplace_back(
-                invL,
-                cha1.ChannelId,
-                cha2.ChannelId);
+            // mChannelPairs.emplace_back(
+            //     invL,
+            //     cha1.ChannelId,
+            //     cha2.ChannelId);
         };
 
         ForEachChannelAnglePair(*this, makeInvMat);

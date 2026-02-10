@@ -328,7 +328,7 @@ namespace JPL
 	}
 
 	template<CVec3 Vec3Type>
-	inline ConvexHullBuilder<Vec3Type>::Edge* ConvexHullBuilder<Vec3Type>::Edge::GetPreviousEdge()
+	inline typename ConvexHullBuilder<Vec3Type>::Edge* ConvexHullBuilder<Vec3Type>::Edge::GetPreviousEdge()
 	{
 		Edge* prev_edge = this;
 		while (prev_edge->mNextEdge != this)
@@ -513,7 +513,7 @@ namespace JPL
 	}
 
 	template<CVec3 Vec3Type>
-	inline ConvexHullBuilder<Vec3Type>::EResult ConvexHullBuilder<Vec3Type>::Initialize(int inMaxVertices, float inTolerance, const char*& outError)
+	inline typename ConvexHullBuilder<Vec3Type>::EResult ConvexHullBuilder<Vec3Type>::Initialize(int inMaxVertices, float inTolerance, const char*& outError)
 	{
 		// Free the faces possibly left over from an earlier hull
 		FreeFaces();
@@ -1118,7 +1118,7 @@ namespace JPL
 	}
 
 	template<CVec3 Vec3Type>
-	inline ConvexHullBuilder<Vec3Type>::Face* ConvexHullBuilder<Vec3Type>::CreateFace()
+	inline typename ConvexHullBuilder<Vec3Type>::Face* ConvexHullBuilder<Vec3Type>::CreateFace()
 	{
 		// Call provider to create face
 		Face* f = DefaultNew<Face>();
@@ -1134,7 +1134,7 @@ namespace JPL
 	}
 
 	template<CVec3 Vec3Type>
-	inline ConvexHullBuilder<Vec3Type>::Face* ConvexHullBuilder<Vec3Type>::CreateTriangle(int inIdx1, int inIdx2, int inIdx3)
+	inline typename ConvexHullBuilder<Vec3Type>::Face* ConvexHullBuilder<Vec3Type>::CreateTriangle(int inIdx1, int inIdx2, int inIdx3)
 	{
 		Face* f = CreateFace();
 		f->Initialize(inIdx1, inIdx2, inIdx3, mPositions);

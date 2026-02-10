@@ -39,7 +39,7 @@ namespace JPL
 
 		[[nodiscard]] static const Basis& Identity() noexcept
 		{
-			static constexpr Basis sIdentity(
+			constexpr Basis sIdentity(
 				Vec3{ Float(1), Float(0), Float(0) },
 				Vec3{ Float(0), Float(1), Float(0) },
 				Vec3{ Float(0), Float(0), Float(1) }

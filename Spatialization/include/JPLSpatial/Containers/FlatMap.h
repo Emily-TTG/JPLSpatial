@@ -50,7 +50,7 @@ namespace JPL
 	class FlatMap
 	{
 	public:
-		using allocator_type = KeyContainer::allocator_type;
+		using allocator_type = typename KeyContainer::allocator_type;
 
 		using key_type = Key;
 		using mapped_type = T;

@@ -282,7 +282,7 @@ namespace JPL
 
 					const float channelAngle = getChannelAngle(channel);
 
-					sortedChannelAngles.emplace_back(channelAngle < 0.0f ? channelAngle + JPL_TWO_PI : channelAngle, channelIndex);
+					// sortedChannelAngles.emplace_back(ChannelAngle{channelAngle < 0.0f ? channelAngle + JPL_TWO_PI : channelAngle}, channelIndex);
 				});
 
 				std::ranges::sort(sortedChannelAngles);

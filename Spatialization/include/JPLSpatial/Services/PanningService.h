@@ -514,6 +514,9 @@ namespace JPL
 
 				JPL_ASSERT(sourceLayout);
 
+				std::pmr::vector<ChannelGains>& gainsRef = gains;
+				auto getOutGains = [&gainsRef](uint32 channel) -> auto& { return gainsRef[channel]; };
+
 				// TODO: move this switch statement outside of the loop
 				switch (spatialziationType)
 				{

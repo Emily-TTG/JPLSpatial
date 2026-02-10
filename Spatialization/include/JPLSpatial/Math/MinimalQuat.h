@@ -60,7 +60,7 @@ namespace JPL
         {
             const Float halfAngle = Float(0.5) * angleRad;
             const auto [s, c] = Math::SinCos(halfAngle);
-            return Quat(axis * s, c);
+            return Quat{.V = axis * s, .W = c};
         }
 
         /// Find quaternian rotation between two unit vectors

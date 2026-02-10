@@ -221,7 +221,9 @@ namespace JPL
 
 		//std::shared_ptr<AttenuationFunction> curve = make_pmr_shared(attenuationFunction);
 		auto& cache = mAttenuationCache[source];
-		return cache.emplace_back(attenuationFunction, 1.0f).Curve;
+		return cache.emplace_back(CurveAttenuationCache{
+			.Curve = attenuationFunction,
+			.AttenuationValue = 1.0f}).Curve;
 		//return curve;
 	}
 
